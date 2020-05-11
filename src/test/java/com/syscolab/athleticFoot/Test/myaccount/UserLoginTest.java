@@ -12,7 +12,10 @@ Created By Piyumi
 */
 
 public class UserLoginTest {
-
+    @AfterClass
+    public void guiteDriver() {
+        AhleticHome.quiteDriver();
+    }
     @Test
     public void testMyAccountNavigation() {
         SoftAssert softAssert = new SoftAssert();
