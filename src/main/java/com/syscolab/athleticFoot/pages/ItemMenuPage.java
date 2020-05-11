@@ -24,9 +24,17 @@ public class ItemMenuPage extends BasePage {
     }
 
     public void clickCategory() {
-        WebElement category = getListCategory();
+        WebElement category;
+        category = getListCategory();
         //syscoLabUI.sleep(10);
-        category.click();
+        if(category.isDisplayed()) {
+            category.click();
+        }
+        else
+        {
+            category = getListCategory();
+            category.click();
+        }
     }
 
     public void wait(int num) {
