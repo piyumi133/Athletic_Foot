@@ -22,7 +22,7 @@ public class Item {
 
             while (allItemCount > itemPage.getCurrentItemCount() && itemPage.isbtnLoadMoreEnable()) {
                 int randomNum = random.nextInt(10);
-                System.out.println(randomNum);
+                //System.out.println(randomNum);
                 if (randomNum % 2 == 0) {
                     break;
                 }
