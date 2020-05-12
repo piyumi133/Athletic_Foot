@@ -1,4 +1,4 @@
-package com.syscolab.athleticFoot.Test.myaccount;
+package com.syscolab.athleticFoot.Test.item;
 
 import com.syscolab.athleticFoot.data.testdata.CardTestData;
 import com.syscolab.athleticFoot.data.testdata.LoginTestData;
