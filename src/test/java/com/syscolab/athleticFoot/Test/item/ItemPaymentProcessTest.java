@@ -5,6 +5,8 @@ import com.syscolab.athleticFoot.data.testdata.LoginTestData;
 import com.syscolab.athleticFoot.data.testdata.SecureCheckoutData;
 import com.syscolab.athleticFoot.functions.*;
 import com.syscolab.athleticFoot.utils.TestBase;
+import com.syscolab.qe.core.reporting.SyscoLabListener;
+import com.syscolab.qe.core.reporting.SyscoLabQCenter;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 
@@ -13,7 +15,7 @@ Created By Piyumi
 10/05/2021
 */
 
-public class ItemPaymentProcessTest {
+public class ItemPaymentProcessTest extends TestBase {
 
  public String itemName;
  public String itemPrice;
@@ -31,7 +33,7 @@ public class ItemPaymentProcessTest {
 
     @Test
     public void testAddClearShoppingCart() {
-        SoftAssert softAssert = new SoftAssert();
+
         //Clear shopping Cart
         ShoppingCart.clearCart();
         ShoppingCart.wait(2);
@@ -40,7 +42,6 @@ public class ItemPaymentProcessTest {
     }
     @Test(dependsOnMethods="testAddClearShoppingCart")
     public void testAddItemsToCart() {
-        SoftAssert softAssert = new SoftAssert();
         //add Item
         ItemMenu.SelectMenuAndNavigateToCategory();
         Category.selectRandomCategory();
@@ -57,7 +58,7 @@ public class ItemPaymentProcessTest {
     }
     @Test(dependsOnMethods = "testAddItemsToCart")
     public void testShoppingCartItem() {
-        SoftAssert softAssert = new SoftAssert();//View item and verify the item
+     //View item and verify the item
 
         ShoppingCart.clickViewCart();
         String cartItemPrice = ShoppingCart.getCartItemPrice();
@@ -73,7 +74,6 @@ public class ItemPaymentProcessTest {
     }
     @Test(dependsOnMethods = "testShoppingCartItem")
     public void testVerifySecureCheckOut() {
-        SoftAssert softAssert = new SoftAssert();
         String userName = MyAccount.getUserName().toLowerCase();
         String firstName = SecureCheckOut.getFirstName().toLowerCase();
         String lastName = SecureCheckOut.getLastName().toLowerCase();
@@ -98,7 +98,7 @@ public class ItemPaymentProcessTest {
     }
     @Test(dependsOnMethods = "testVerifySecureCheckOut")
     public void testVerifyPaymentDetails() {
-        SoftAssert softAssert = new SoftAssert();
+        
         //Verify paymentDetails
         Payment.wait(2);
         softAssert.assertTrue(Payment.isPaypalRadioClickable(), "pay pal button is clickable");

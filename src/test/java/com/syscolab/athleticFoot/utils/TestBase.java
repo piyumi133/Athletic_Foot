@@ -12,14 +12,15 @@ import org.testng.annotations.Listeners;
 import org.testng.asserts.SoftAssert;
 
 @Listeners(SyscoLabListener.class)
-public class TestBase
+public class TestBase extends SyscoLabListener
 {
+    protected SoftAssert softAssert;
     private SyscoLabListener syscoLabListeners;
     private SyscoLabQCenter syscoLabQCenter;
 
     @BeforeMethod
     public void init() {
-        SoftAssert softAssert = new SoftAssert();
+        softAssert = new SoftAssert();
         syscoLabListeners = new SyscoLabListener();
         syscoLabQCenter = new SyscoLabQCenter();
         System.out.println("Running "+this.getClass().toString());
@@ -41,11 +42,7 @@ public class TestBase
             e.printStackTrace();
         }
     }
-    @BeforeTest(alwaysRun =true)
-    public void beforeTestSetup()
-    {
-        SoftAssert softAssert = new SoftAssert();
-    }
+
 
 
 
