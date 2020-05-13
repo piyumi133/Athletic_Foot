@@ -24,7 +24,7 @@ public class ItemMenu {
         randomItem.click();
         itemMenuPage.wait(2);
         itemMenuPage.clickCategory();
-        // ((RemoteWebElement) randomItem).findElementByCssSelector("ul>li>a[title='Categories']").click();
+
 
     }
 

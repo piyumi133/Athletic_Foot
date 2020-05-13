@@ -5,10 +5,8 @@ import com.syscolab.athleticFoot.data.testdata.LoginTestData;
 import com.syscolab.athleticFoot.data.testdata.SecureCheckoutData;
 import com.syscolab.athleticFoot.functions.*;
 import com.syscolab.athleticFoot.utils.TestBase;
-import com.syscolab.qe.core.reporting.SyscoLabListener;
-import com.syscolab.qe.core.reporting.SyscoLabQCenter;
 import org.testng.annotations.*;
-import org.testng.asserts.SoftAssert;
+
 
 /*
 Created By Piyumi
@@ -98,7 +96,7 @@ public class ItemPaymentProcessTest extends TestBase {
     }
     @Test(dependsOnMethods = "testVerifySecureCheckOut")
     public void testVerifyPaymentDetails() {
-        
+
         //Verify paymentDetails
         Payment.wait(2);
         softAssert.assertTrue(Payment.isPaypalRadioClickable(), "pay pal button is clickable");
