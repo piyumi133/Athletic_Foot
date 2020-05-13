@@ -13,7 +13,6 @@ Created By Piyumi
 */
 
 public class HomePage extends BasePage {
-    //  protected static SyscoLabUI syscoLabUI;
 
     private By lnkLogin = By.xpath("//*[@class='authorization-link -notlogin']");
 

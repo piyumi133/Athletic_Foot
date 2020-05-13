@@ -12,12 +12,14 @@ public class PaymentPage extends BasePage {
     private By rdBtnPaypal = By.xpath("//*[@id='payment-method-braintree-paypal']/div[1]/label");
     private By rdBtnVisa = By.xpath("//*[@id='checkout-payment-method-load']/div/div/div[3]/div[1]/label");
     private By rdBtnAfterpay = By.id("afterpaypayovertime");
-    private By txtCardNumber = By.cssSelector("#credit-card-number");
-    private By txtCSV = By.cssSelector("#cvv");
-    private By txtExpiry = By.cssSelector("#expiration");
+    private By txtCardNumber = By.id("credit-card-number");
+    private By txtCSV = By.id("cvv");
+    private By txtExpiry = By.id("expiration");
     private By lblBillingAddress = By.xpath("//*[@class='billing-address-details']");
-    private By lblErrorInvalid = By.cssSelector(".hosted-error > span");
-    private By iframeCardDetails = By.cssSelector(".hosted-control > iframe");
+    private By lblErrorInvalid = By.xpath("//*[@class='hosted-error']/span");
+    private By iframeCardNumber = By.xpath("//*[@id='braintree_cc_number']/iframe");
+    private By iframeCVV = By.xpath("//*[@class='hosted-control hosted-cid']/iframe");
+    private By iframeExpiry = By.xpath("//*[@id='braintree_expirationDate']/iframe");
 
     public String getTitleText() {
         return syscoLabUI.getText(lblpaymentTitle);
@@ -38,20 +40,20 @@ public class PaymentPage extends BasePage {
 
     public void setCreditCardNumber(String creditCardNumber) {
         syscoLabUI.switchToDefaultFrame();
-        syscoLabUI.switchToFrame(syscoLabUI.findElements(iframeCardDetails).get(0));
+        syscoLabUI.switchToFrame(syscoLabUI.findElement(iframeCardNumber));
         syscoLabUI.sendKeys(txtCardNumber, creditCardNumber);
     }
 
     public void setTxtExpiry(String date) {
         syscoLabUI.switchToDefaultFrame();
-        syscoLabUI.switchToFrame(syscoLabUI.findElements(iframeCardDetails).get(1));
+        syscoLabUI.switchToFrame(syscoLabUI.findElement(iframeExpiry));
         syscoLabUI.sendKeys(txtExpiry, date);
         // syscoLabUI.sendKeys(txtExpiry,date);
     }
 
     public void setTxtCSV(String csv) {
         syscoLabUI.switchToDefaultFrame();
-        syscoLabUI.switchToFrame(syscoLabUI.findElements(iframeCardDetails).get(2));
+        syscoLabUI.switchToFrame(syscoLabUI.findElement(iframeCVV));
         syscoLabUI.sendKeys(txtCSV, csv);
         //  syscoLabUI.sendKeys(txtCSV,csv);
     }

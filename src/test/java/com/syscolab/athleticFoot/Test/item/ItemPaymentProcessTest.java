@@ -4,6 +4,7 @@ import com.syscolab.athleticFoot.data.testdata.CardTestData;
 import com.syscolab.athleticFoot.data.testdata.LoginTestData;
 import com.syscolab.athleticFoot.data.testdata.SecureCheckoutData;
 import com.syscolab.athleticFoot.functions.*;
+import com.syscolab.athleticFoot.utils.TestBase;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 
@@ -14,7 +15,8 @@ Created By Piyumi
 
 public class ItemPaymentProcessTest {
 
-
+ public String itemName;
+ public String itemPrice;
     @BeforeClass
     public void loginToSite() {
         AhleticHome.navigateToHomePage();
@@ -28,28 +30,35 @@ public class ItemPaymentProcessTest {
     }
 
     @Test
-    public void testItemPaymentProcess() {
+    public void testAddClearShoppingCart() {
         SoftAssert softAssert = new SoftAssert();
         //Clear shopping Cart
         ShoppingCart.clearCart();
         ShoppingCart.wait(2);
         softAssert.assertFalse(ShoppingCart.isCartWithItem(), "Cart is not empty as expected");
-
-
+        softAssert.assertAll();
+    }
+    @Test(dependsOnMethods="testAddClearShoppingCart")
+    public void testAddItemsToCart() {
+        SoftAssert softAssert = new SoftAssert();
         //add Item
         ItemMenu.SelectMenuAndNavigateToCategory();
         Category.selectRandomCategory();
         Item.selectRandomItem();
         Item.clickRandomItem();
         Item.clickRandomSize();
-        String itemName = Item.getItemName();
+        itemName = Item.getItemName();
         System.out.println(itemName);
-        String itemPrice = Item.getItemPrice();
+        itemPrice = Item.getItemPrice();
         System.out.println(itemPrice);
         Item.addtoCart();
-
-        //View item and verify the item
         ShoppingCart.wait(2);
+        softAssert.assertAll();
+    }
+    @Test(dependsOnMethods = "testAddItemsToCart")
+    public void testShoppingCartItem() {
+        SoftAssert softAssert = new SoftAssert();//View item and verify the item
+
         ShoppingCart.clickViewCart();
         String cartItemPrice = ShoppingCart.getCartItemPrice();
         String cartItemName = ShoppingCart.getCartItemName();
@@ -58,6 +67,13 @@ public class ItemPaymentProcessTest {
 
         //Navigate to secureCheckOut
         ShoppingCart.clickSecureCheckOut();
+        softAssert.assertAll();
+
+
+    }
+    @Test(dependsOnMethods = "testShoppingCartItem")
+    public void testVerifySecureCheckOut() {
+        SoftAssert softAssert = new SoftAssert();
         String userName = MyAccount.getUserName().toLowerCase();
         String firstName = SecureCheckOut.getFirstName().toLowerCase();
         String lastName = SecureCheckOut.getLastName().toLowerCase();
@@ -65,18 +81,24 @@ public class ItemPaymentProcessTest {
 
         //Validate mandetory field
         SecureCheckOut.clickSecureCheckOutButton();
-        softAssert.assertEquals(SecureCheckOut.getAddress1Error(), SecureCheckoutData.ERROR_REQUIRED, "error message is not appered as expected[Address1]");
-        softAssert.assertEquals(SecureCheckOut.getSuburbError(), SecureCheckoutData.ERROR_REQUIRED, "error message is not appered as expected[Suburb]");
-        softAssert.assertEquals(SecureCheckOut.getStateError(), SecureCheckoutData.ERROR_REQUIRED, "error message is not appered as expected[State]");
-        softAssert.assertEquals(SecureCheckOut.getPostalCodeError(), SecureCheckoutData.ERROR_REQUIRED, "error message is not appered as expected[PostalCode]");
-        softAssert.assertEquals(SecureCheckOut.getPhoneError(), SecureCheckoutData.ERROR_REQUIRED, "error message is not appered as expected[Phone]");
+        softAssert.assertEquals(SecureCheckOut.getError(), SecureCheckoutData.ERROR_REQUIRED, "error message is not appered as expected[Address1]");
+        softAssert.assertEquals(SecureCheckOut.getError(), SecureCheckoutData.ERROR_REQUIRED, "error message is not appered as expected[Suburb]");
+        softAssert.assertEquals(SecureCheckOut.getError(), SecureCheckoutData.ERROR_REQUIRED, "error message is not appered as expected[State]");
+        softAssert.assertEquals(SecureCheckOut.getError(), SecureCheckoutData.ERROR_REQUIRED, "error message is not appered as expected[PostalCode]");
+        softAssert.assertEquals(SecureCheckOut.getError(), SecureCheckoutData.ERROR_REQUIRED, "error message is not appered as expected[Phone]");
 
         //Proceed secureCheckout
         SecureCheckOut.setAddress1(SecureCheckoutData.ADDRESS1);
         SecureCheckOut.setSbuburb();
         SecureCheckOut.setPhoneNumber(SecureCheckoutData.PHONE_NUMBEER);
         SecureCheckOut.clickSecureCheckOutButton();
+        softAssert.assertAll();
 
+
+    }
+    @Test(dependsOnMethods = "testVerifySecureCheckOut")
+    public void testVerifyPaymentDetails() {
+        SoftAssert softAssert = new SoftAssert();
         //Verify paymentDetails
         Payment.wait(2);
         softAssert.assertTrue(Payment.isPaypalRadioClickable(), "pay pal button is clickable");
@@ -103,6 +125,4 @@ public class ItemPaymentProcessTest {
 
         softAssert.assertAll();
     }
-
-
 }

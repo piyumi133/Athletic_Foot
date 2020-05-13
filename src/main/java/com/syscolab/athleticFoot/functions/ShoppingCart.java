@@ -30,7 +30,9 @@ public class ShoppingCart {
 
     public static void clickViewCart() {
         shoppingCartPage.clickShoppingCart();
+        shoppingCartPage.wait(2);
         shoppingCartPage.clickViewCart();
+        shoppingCartPage.wait(3);
     }
 
     public static String getCartItemName() {

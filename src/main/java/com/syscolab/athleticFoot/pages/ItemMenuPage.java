@@ -12,8 +12,9 @@ Created By Piyumi
 */
 
 public class ItemMenuPage extends BasePage {
+    private By lstCatgooryItems = By.xpath("//ul/li//*[contains(@title,'Categories')]");
     private By lstMenuItems = By.cssSelector(".navigation-wrapper .menu-wrapper  .item.-parent.-level1");
-    private By lstCatgooryItems = By.cssSelector("ul>li>a[title='Categories']");
+
 
     public List<WebElement> getMenuItems() {
         return syscoLabUI.findElements(lstMenuItems);
@@ -27,11 +28,9 @@ public class ItemMenuPage extends BasePage {
         WebElement category;
         category = getListCategory();
         //syscoLabUI.sleep(10);
-        if(category.isDisplayed()) {
+        if (category.isDisplayed()) {
             category.click();
-        }
-        else
-        {
+        } else {
             category = getListCategory();
             category.click();
         }

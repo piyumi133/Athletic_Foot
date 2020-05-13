@@ -9,22 +9,18 @@ Created By Piyumi
 */
 
 public class SecureCheckOutPage extends BasePage {
-    private By txtFirstName = By.cssSelector("#shipping-new-address-form > div > div >input[name='firstname']");
-    private By txtLastName = By.cssSelector("#shipping-new-address-form > div > div >input[name='lastname']");
-    private By txtCompany = By.cssSelector("#shipping-new-address-form > div > div > input[name='company']");
-    private By txtSuburb = By.cssSelector("#shipping-new-address-form > div > div > input[name='city']");
-    private By txtPostCode = By.cssSelector("#shipping-new-address-form > div > div > input[name='postcode']");
-    private By txtState = By.cssSelector("#shipping-new-address-form > div > div  > select[name='region_id'] ");
-    private By txtCountry = By.cssSelector("#shipping-new-address-form > div > div  > select[name='country_id'] ");
-    private By txtAddress1 = By.cssSelector("div[name='shippingAddress.street.0'] > div > input");
-    private By txtPhoneNumber = By.cssSelector("div[name='shippingAddress.telephone'] > div > div > div > input");
+    private By txtFirstName = By.xpath("//*[@id='shipping-new-address-form']//input[@name='firstname']");
+    private By txtLastName = By.xpath("//*[@id='shipping-new-address-form']//input[@name='lastname']");
+    private By txtCompany = By.xpath("//*[@id='shipping-new-address-form']//input[@name='company']");
+    private By txtSuburb = By.xpath("//*[@id='shipping-new-address-form']//input[@name='city']");
+    private By txtPostCode = By.xpath("//*[@id='shipping-new-address-form']//input[@name='postcode']");
+    private By txtState = By.xpath("//*[@id='shipping-new-address-form']//select[@name='region_id']");
+    private By txtCountry = By.xpath("//*[@id='shipping-new-address-form']//select[@name='country_id'] ");
+    private By txtAddress1 = By.xpath("//*[contains(@name,'shippingAddress.street.0')]/div/input");
+    private By txtPhoneNumber = By.xpath("//*[contains(@name,'shippingAddress.telephone')]/div/div/div/input");
     private By btnContinue = By.xpath("//*[contains(@title, 'Continue')]");
-    private By lblErrorAddress1 = By.xpath("//*[@class='field-error mage-error']");
-    private By lblErrorSubRub = By.xpath("//*[@class='field-error mage-error']");
-    private By lblErrorState = By.xpath("//*[@class='field-error mage-error']");
-    private By lblErrorPostCode = By.xpath("//*[@class='field-error mage-error']");
-    private By lblErrorPhone = By.xpath("//*[@class='field-error mage-error']");
-    private By drpDwnSubub = By.cssSelector("#ui-id-1 > li > a");
+    private By lblError = By.xpath("//*[@class='field-error mage-error']");
+    private By drpDwnSubub = By.xpath("//*[@id='ui-id-1']/li/a");
 
 
     public String getFirstName() {
@@ -39,24 +35,8 @@ public class SecureCheckOutPage extends BasePage {
         syscoLabUI.click(btnContinue);
     }
 
-    public String getErrorAddress1() {
-        return syscoLabUI.getText(lblErrorAddress1);
-    }
-
-    public String getErrorSuburb() {
-        return syscoLabUI.getText(lblErrorSubRub);
-    }
-
-    public String getErrorState() {
-        return syscoLabUI.getText(lblErrorState);
-    }
-
-    public String getErrorPostalCode() {
-        return syscoLabUI.getText(lblErrorPostCode);
-    }
-
-    public String getErrorPhone() {
-        return syscoLabUI.getText(lblErrorPhone);
+    public String getError() {
+        return syscoLabUI.getText(lblError);
     }
 
     public void setTxtAddress1(String address1) {

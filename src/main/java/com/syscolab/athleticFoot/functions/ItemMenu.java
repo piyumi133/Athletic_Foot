@@ -18,7 +18,7 @@ public class ItemMenu {
 
     public static void SelectMenuAndNavigateToCategory() {
 
-        List<WebElement> menuItems = itemMenuPage.getMenuItems();
+       List<WebElement> menuItems = itemMenuPage.getMenuItems();
         int randomInt = random.nextInt(menuItems.size() - 2);
         WebElement randomItem = menuItems.get(randomInt);
         randomItem.click();

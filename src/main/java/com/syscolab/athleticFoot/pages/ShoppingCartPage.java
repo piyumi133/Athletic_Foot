@@ -20,9 +20,9 @@ public class ShoppingCartPage extends BasePage {
     private By lblTitle = By.id("modal-content-37");
     private By btnClose = By.xpath("//*[@class='action-secondary action-dismiss button -secondary']");
     private By btnOk = By.xpath("//*[@class='action-primary action-accept button -secondary']");
-    private By btnViewCart = By.cssSelector(".minicart-bottom .actions a.button");
-    private By divItemName = By.cssSelector(".item-details strong.name");
-    private By lblItemPrice = By.cssSelector(".col.price .cart-price");
+    private By btnViewCart = By.xpath("//*[@class='minicart-bottom']/div/a");
+    private By divItemName = By.xpath("//*[@class='item-details']/strong");
+    private By lblItemPrice = By.xpath("//*[@class='col price']//*[@class='price']");
     private By btnSecureCheckOut = By.xpath("//*[@class='action button -primary primary -expanded checkout']");
 
     public void clickShoppingCart() {

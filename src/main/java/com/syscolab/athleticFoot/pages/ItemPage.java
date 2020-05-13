@@ -11,14 +11,14 @@ Created By Piyumi
 */
 
 public class ItemPage extends BasePage {
-    private By btnLoadMore = By.cssSelector("button.button.infinitescroll-button");
-    private By lstItem = By.cssSelector(".sli_product > a");
+
+    private By btnLoadMore = By.xpath("//*[@id='ewave-layerednavigation-product-list']//button");
+    private By lstItem = By.xpath("//*[@class='sli_product']/a");
     private By btnAddToCart = By.id("product-addtocart-button");
     private By lstSize = By.xpath("//*[@class='swatch-row -active']//*[@class='swatch-option text']");
-    private By lblItemName = By.cssSelector(".page-title.product span.base");
-    private By lblItemPrice = By.cssSelector(".product-info-main .price");
-    private By lbldicountItemPrice = By.cssSelector(".product-info-main .price-final_price .special-price .price");
-
+    private By lblItemName = By.xpath("//*[@class='page-title  product']//span");
+    private By lblItemPrice = By.xpath("//*[@class='product-info-price']//*[@class='price']");
+    private By lbldicountItemPrice = By.xpath("//*[@class='special-price']//*[@class='price']");
 
     public int getAllItemCount() {
         syscoLabUI.sleep(5);

@@ -21,24 +21,8 @@ public class SecureCheckOut {
         secureCheckOutPage.clickBtnContinue();
     }
 
-    public static String getAddress1Error() {
-        return secureCheckOutPage.getErrorAddress1();
-    }
-
-    public static String getSuburbError() {
-        return secureCheckOutPage.getErrorSuburb();
-    }
-
-    public static String getStateError() {
-        return secureCheckOutPage.getErrorState();
-    }
-
-    public static String getPostalCodeError() {
-        return secureCheckOutPage.getErrorPostalCode();
-    }
-
-    public static String getPhoneError() {
-        return secureCheckOutPage.getErrorPhone();
+    public static String getError() {
+        return secureCheckOutPage.getError();
     }
 
     public static void setAddress1(String address1) {
